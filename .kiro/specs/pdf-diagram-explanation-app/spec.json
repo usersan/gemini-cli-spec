@@ -1,0 +1,7 @@
+{
+  "feature": "pdf-diagram-explanation-app",
+  "description": "ユーザーがPDFをアップロードして、その中の図表を抽出し、AIが内容を説明する機能を作りたい。技術スタックはNext.js、TypeScript、Tailwind CSSを使用。",
+  "requirements_approved": true,
+  "design_approved": true,
+  "tasks_approved": true
+}
