@@ -1,43 +1,26 @@
-# Product Overview
+# プロダクトステアリング: 仕様駆動開発CLI
 
-Claude Code Spec-Driven Development is a comprehensive framework that implements Kiro-style specification-driven development workflows within Claude Code using hooks and slash commands.
+## 1. プロダクト概要
 
-## Core Features
+このプロジェクトは、仕様駆動開発（Spec-Driven Development - SDD）を促進するためのコマンドラインインターフェース（CLI）ツールを提供します。開発者がソフトウェア仕様の作成と管理のプロセスを合理化し、開発が明確に事前定義された要件と設計に沿って行われるように支援します。
 
-- **3-Phase Approval Workflow**: Requirements → Design → Tasks → Implementation with mandatory human review at each phase
-- **Intelligent Steering System**: Automated creation and maintenance of project knowledge documents (product, tech, structure)
-- **Slash Command Toolset**: 7 specialized commands for managing the complete spec-driven development lifecycle
-- **Automated Progress Tracking**: Hook-based system for monitoring task completion and specification compliance
-- **Multi-language Support**: Complete documentation and configurations in Japanese, English, and Traditional Chinese
-- **Context Preservation**: Smart context management during Claude Code session compression
-- **Project Template System**: Ready-to-use examples and templates for quick project setup
+## 2. コア機能
 
-## Target Use Case
+- **ステアリングドキュメント管理**: 主要なプロジェクトステアリングドキュメント（`product.md`、`tech.md`、`structure.md`）を自動生成・更新します。
+- **仕様ワークフロー**: 要件、技術設計、タスク生成を含む、仕様を作成するためのガイド付きプロセスを提供します。
+- **進捗追跡**: 仕様の進捗を様々な段階（例：要件、設計、タスク）で監視します。
+- **カスタマイズ可能**: カスタムステアリングドキュメントを通じて、さまざまなプロジェクトのニーズに適応できる柔軟性を持ちます。
 
-This framework is designed for software development teams and individual developers who want to:
+## 3. 対象読者とユースケース
 
-- **Maintain consistency** across AI-assisted development sessions
-- **Ensure quality** through structured review processes
-- **Track progress** transparently on complex feature development
-- **Preserve project knowledge** through persistent steering documents
-- **Follow systematic development** rather than ad-hoc coding approaches
-- **Integrate AI assistance** into established development workflows
+- **主な対象者**: ソフトウェア開発者およびテクニカルリード。
+- **ユースケース1**: 新機能の開発を開始する開発者が、CLIを使用して迅速に完全な仕様を生成できます。
+- **ユースケース2**: チームがCLIを使用して、プロジェクトのアーキテクチャと目標に関する共通の理解を維持できます。
+- **ユースケース3**: テクニカルリードがCLIを使用して、開発標準とベストプラクティスを徹底できます。
 
-The system is particularly valuable for:
-- Complex feature development requiring multiple development sessions
-- Team environments where project knowledge needs to be shared
-- Long-term projects where architectural decisions need documentation
-- Quality-focused development requiring structured review processes
+## 4. 価値提案
 
-## Key Value Proposition
-
-**Bridging the gap between Kiro IDE's advanced spec-driven development and Claude Code's powerful AI assistance.** 
-
-The framework provides:
-- **Structured AI Collaboration**: Transforms ad-hoc AI interactions into systematic development processes
-- **Knowledge Persistence**: Maintains project context across sessions through steering documents
-- **Quality Assurance**: Enforces human review at critical development phases
-- **Automation with Control**: Automates routine tasks while preserving human oversight
-- **Proven Methodology**: Implements battle-tested Kiro development patterns in Claude Code environment
-
-This enables developers to achieve the same level of systematic, high-quality development that Kiro users enjoy, while leveraging Claude Code's accessibility and powerful AI capabilities.
+- **効率の向上**: 仕様ドキュメントの作成を自動化し、開発者の時間を節約します。
+- **品質の向上**: すべての開発作業が、堅牢で明確に定義された仕様に基づいていることを保証します。
+- **連携の改善**: 開発チームがプロジェクトの目標と技術的な方向性について連携を保ちます。
+- **一貫性の強化**: 組織全体でソフトウェアの設計と開発に対する一貫したアプローチを促進します。

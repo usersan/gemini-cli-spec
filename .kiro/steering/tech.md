@@ -1,163 +1,33 @@
-# Technology Stack
+# 技術ステアリング: 仕様駆動開発CLI
 
-## Architecture
+## 1. アーキテクチャ概要
 
-Documentation-driven framework built on Claude Code's native extensibility features. The architecture consists of three main layers:
+このプロジェクトは、Pythonで構築されたコマンドラインインターフェース（CLI）ツールです。モジュール式で拡張可能に設計されており、将来的に新しいコマンドや機能を追加できます。
 
-1. **Command Layer**: Markdown-based slash commands with dynamic content generation
-2. **Automation Layer**: Python-based hooks for automated progress tracking and validation
-3. **Knowledge Layer**: Structured markdown documents for persistent project context
+## 2. 技術スタック
 
-## Core Technologies
+- **言語**: Python 3.x
+- **CLIフレームワーク**: `click`（または`argparse`のような類似のライブラリ）
+- **ファイルI/O**: ファイルおよびディレクトリ操作のための標準Pythonライブラリ
+- **テスト**: 単体テストおよび統合テストのための`pytest`
 
-### Claude Code Platform
-- **Base Platform**: Claude Code CLI (Anthropic's official Claude interface)
-- **Model**: Claude Sonnet 4 (claude-sonnet-4-20250514)
-- **Extension System**: Native hooks and slash commands support
-- **Context Management**: Built-in compaction with preservation hooks
+## 3. 開発環境
 
-### Command System
-- **Definition Format**: Markdown files with YAML frontmatter
-- **Dynamic Content**: Bash execution (`!command`) and file inclusion (`@file.md`)
-- **Argument Passing**: `$ARGUMENTS` variable for parameter handling
-- **Tool Restrictions**: `allowed-tools` specification for security
+- **バージョン管理**: Git
+- **パッケージ管理**: `pip`および`requirements.txt`
+- **コードフォーマット**: `black`
+- **リンティング**: `ruff`
 
-### Hook System
-- **Configuration**: JSON-based hook definitions in `.claude/settings.json`
-- **Execution Environment**: Python 3 scripts with JSON I/O
-- **Event Types**: PostToolUse, PreToolUse, PreCompact, Stop
-- **Performance**: Configurable timeouts (5-10 seconds typical)
+## 4. 主要コマンド
 
-## Development Environment
+- `gemini steering`: ステアリングドキュメントを管理します。
+- `gemini spec init [feature-name]`: 新しい仕様を初期化します。
+- `gemini spec requirements [feature-name]`: 仕様の要件を生成します。
+- `gemini spec design [feature-name]`: 仕様の技術設計を生成します。
+- `gemini spec tasks [feature-name]`: 仕様の実装タスクを生成します。
+- `gemini spec status [feature-name]`: 仕様のステータスを確認します。
 
-### Required Tools
-- **Claude Code**: Latest version with hooks and slash commands support
-- **Python 3**: For hook scripts (progress tracking, validation)
-- **Git**: For version control and change detection
-- **Markdown Editor**: For document editing and review
+## 5. データ管理
 
-### Project Structure
-```
-.claude/
-├── commands/kiro/           # Slash command definitions
-│   ├── steering*.md         # Steering management commands
-│   ├── spec-*.md           # Specification workflow commands
-│   └── *.md                # Additional command definitions
-├── scripts/                 # Hook automation scripts
-│   ├── check-steering-drift.py
-│   ├── update-spec-progress.py
-│   └── preserve-spec-context.py
-└── settings.json           # Hook configuration
-
-.kiro/
-├── steering/               # Project knowledge documents
-│   ├── product.md
-│   ├── tech.md
-│   └── structure.md
-└── specs/                  # Feature specifications
-    └── [feature-name]/
-        ├── spec.json       # Metadata and approval flags
-        ├── requirements.md
-        ├── design.md
-        └── tasks.md
-```
-
-## Common Commands
-
-### Core Workflow Commands
-```bash
-# Steering management (recommended unified command)
-/kiro:steering                    # Smart create/update steering documents
-
-# Specification workflow
-/kiro:spec-init [description]     # Initialize new specification
-/kiro:spec-requirements [name]    # Generate requirements document
-/kiro:spec-design [name]          # Generate technical design
-/kiro:spec-tasks [name]           # Generate implementation tasks
-/kiro:spec-status [name]          # Check progress and compliance
-```
-
-### Legacy Commands (Deprecated)
-```bash
-# These commands are maintained for compatibility but not recommended
-/kiro:steering-init              # [DEPRECATED] Use /kiro:steering instead
-/kiro:steering-update            # [DEPRECATED] Use /kiro:steering instead
-/kiro:steering-custom            # Still used for specialized steering documents
-```
-
-### Manual Operations
-```bash
-# Project setup (one-time)
-cp -r .claude/ /your-project/     # Copy command definitions
-cp CLAUDE.md /your-project/       # Copy project configuration
-
-# Progress management
-# Edit spec.json manually to approve phases:
-# "requirements": true, "design": true, "tasks": true
-```
-
-## Environment Variables
-
-### Claude Code Configuration
-- **CLAUDE_HOOKS_ENABLED**: Enable hook system (default: true)
-- **CLAUDE_COMMAND_TIMEOUT**: Command execution timeout (default: 120s)
-- **CLAUDE_CONTEXT_PRESERVATION**: Enable context hooks (default: true)
-
-### Project Configuration
-- **KIRO_LANGUAGE**: Default language for generated content (ja/en/zh-TW)
-- **KIRO_STEERING_MODE**: Steering inclusion mode (always/conditional/manual)
-- **KIRO_SPEC_VALIDATION**: Enable specification validation (default: true)
-
-## Hook Configuration Details
-
-### PostToolUse Hooks
-```json
-{
-  "matcher": "Edit|MultiEdit|Write",
-  "hooks": [
-    {
-      "type": "command",
-      "command": "python3 .claude/scripts/check-steering-drift.py",
-      "timeout": 10
-    }
-  ]
-}
-```
-
-### PreCompact Hooks  
-```json
-{
-  "matcher": ".*",
-  "hooks": [
-    {
-      "type": "command", 
-      "command": "python3 .claude/scripts/preserve-spec-context.py",
-      "timeout": 5
-    }
-  ]
-}
-```
-
-## Performance Characteristics
-
-- **Command Execution**: 2-5 seconds for simple commands, 10-30 seconds for document generation
-- **Hook Overhead**: 1-3 seconds per file operation when hooks are active
-- **Context Preservation**: 95%+ success rate in maintaining spec context during compaction
-- **Steering Accuracy**: Automated drift detection with ~90% precision for significant changes
-
-## Integration Points
-
-### Git Integration
-- Hook scripts detect file changes using git status
-- Commit messages can reference specification phases
-- Steering drift detection based on git diff analysis
-
-### Documentation Systems
-- Compatible with standard markdown documentation workflows
-- Generates content suitable for wikis, README files, and technical documentation
-- Supports multi-language documentation maintenance
-
-### CI/CD Compatibility
-- Hook scripts can be adapted for continuous integration
-- Specification compliance can be validated in automated pipelines
-- Progress tracking suitable for project management tool integration
+- **仕様**: `.kiro/specs`ディレクトリ内にマークダウンファイルとして保存されます。
+- **設定**: プロジェクトレベルの設定は、`.kiro/steering`内のステアリングドキュメントを通じて管理されます。
