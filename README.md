@@ -1,35 +1,25 @@
-# Claude Code Spec-Driven Development
+# GEMINI CLI Spec-Driven Development
 
-> 🌐 **Language**  
-> 📖 **[English Version](README_en.md)** | 📖 **日本語版 README** (このページ) | 📖 **[繁體中文說明](README_zh-TW.md)**
-
-
-> [!Warning]
-> 初期バージョンのため、使いながら適宜改善していく予定
-
-📝 **関連記事**  
-**[Kiroの仕様書駆動開発プロセスをClaude Codeで徹底的に再現した](https://zenn.dev/gotalab/articles/3db0621ce3d6d2)** - Zenn記事
-
-Claude CodeのSlash CommandsとCLAUDE.mdを使用して、Kiro IDEに組み込まれているSpec-Driven Developmentを実践するためのプロジェクト。Kiroでの実際の仕様書駆動開発の流れをディレクトリ構成も含めてほぼそのまま再現している。
+Gemini CLIのSlash CommandsとGEMINI.mdを使用して、Kiro IDEに組み込まれているSpec-Driven Developmentを実践するためのプロジェクト。Kiroでの実際の仕様書駆動開発の流れをディレクトリ構成も含めてほぼそのまま再現している。
 
 ## 概要
 
-このプロジェクトは、Claude CodeのSlash Commandsを活用して、仕様駆動開発（Spec-Driven Development）を効率的に行うためのツールセットを提供する。各開発フェーズで適切なコマンドを使用することで、体系的かつ品質の高い開発プロセスを実現できる。
+このプロジェクトは、Gemini CLIのSlash Commandsを活用して、仕様駆動開発（Spec-Driven Development）を効率的に行うためのツールセットを提供する。各開発フェーズで適切なコマンドを使用することで、体系的かつ品質の高い開発プロセスを実現できる。
 
 ## セットアップ
 
 ### 自分のプロジェクトに導入する
 
-Claude Code Spec-Driven Developmentを自分のプロジェクトに導入するには、以下の2つのファイル/ディレクトリをコピーするだけ
+Gemini CLI Spec-Driven Developmentを自分のプロジェクトに導入するには、以下の2つのファイル/ディレクトリをコピーするだけ
 
 1. **`.claude/commands/` ディレクトリ** - Slash Commandsの定義
-2. **`CLAUDE.md` ファイル** - Claude Codeの設定とプロジェクト指示
+2. **`GEMINI.md` ファイル** - Gemini CLIの設定とプロジェクト指示
 
 
 ### 初回セットアップ手順
 
 1. **ファイルをコピー**（上記参照）
-2. **CLAUDE.mdをコピー**してプロジェクトに合わせて調整
+2. **GEMINI.mdをコピー**してプロジェクトに合わせて調整
 3. **最初のコマンドを実行**:
    ```bash
    # オプション: ステアリング文書を作成
@@ -50,17 +40,17 @@ Claude Code Spec-Driven Developmentを自分のプロジェクトに導入する
 ├── .kiro/
 │   ├── steering/          # 自動生成されるステアリング文書
 │   └── specs/             # 自動生成される機能仕様
-├── CLAUDE.md              # 言語別ファイル（例: CLAUDE_en.md, CLAUDE_zh-TW.md）からコピーしてリネーム
-├── CLAUDE_en.md           # 英語版 Claude Code 設定
-├── CLAUDE_zh-TW.md        # 繁体字中国語版 Claude Code 設定
+├── GEMINI.md              # 言語別ファイル（例: GEMINI_en.md, GEMINI_zh-TW.md）からコピーしてリネーム
+├── GEMINI_en.md           # 英語版 Gemini CLI 設定
+├── GEMINI_zh-TW.md        # 繁体字中国語版 Gemini CLI 設定
 ├── README.md              # 日本語版 README
 ├── README_en.md           # 英語版 README
 ├── README_zh-TW.md        # 繁体字中国語版 README
 └── （あなたのプロジェクトファイル）
 ```
-
-## 使い方
-
+├── GEMINI.md              # メイン設定（下記いずれかの言語ファイルからコピー）
+├── GEMINI_en.md           # 英語版設定
+├── GEMINI_zh-TW.md        # 繁体字版設定
 ### 1. 新規プロジェクトの場合
 
 ```bash
@@ -214,7 +204,7 @@ graph TD
 ```mermaid
 sequenceDiagram
     participant D as Developer
-    participant C as Claude Code
+    participant C as Gemini CLI
     participant H as Human Reviewer
     
     D->>C: "/kiro:spec-requirements feature"
@@ -309,7 +299,7 @@ sequenceDiagram
 
 ## 自動化機能
 
-Claude Codeのフック機能により以下が自動化されている
+Gemini CLIのフック機能により以下が自動化されている
 
 - タスク進捗の自動追跡
 - 仕様遵守のチェック
@@ -321,7 +311,7 @@ Claude Codeのフック機能により以下が自動化されている
 ### コマンドが動作しない場合
 1. `.claude/commands/` ディレクトリの存在を確認
 2. コマンドファイルの命名規則を確認（`command-name.md`）
-3. Claude Codeの最新バージョンを使用しているか確認
+3. Gemini CLIの最新バージョンを使用しているか確認
 
 ### 承認フローで詰まった場合
 1. レビュー確認プロンプトに正しく応答しているか確認
@@ -331,7 +321,7 @@ Claude Codeのフック機能により以下が自動化されている
 
 ## まとめ
 
-Claude Codeのスラッシュコマンドを活用したSpec-Driven Developmentにより、以下が実現できる
+Gemini CLIのスラッシュコマンドを活用したSpec-Driven Developmentにより、以下が実現できる
 
 - 📐 体系的な開発プロセス
 - ✅ 品質保証のための段階的承認
